@@ -1,0 +1,8 @@
+127.0.0.1 - - [04/Feb/2017:05:28:40 +0100] "GET / HTTP/1.1" 404 994
+127.0.0.1 - - [04/Feb/2017:05:28:42 +0100] "GET /GameServer/WEB-INF/classes/de/tuberlin/sese/swtpp/gameserver/model/Move.java HTTP/1.1" 404 992
+127.0.0.1 - - [04/Feb/2017:05:32:38 +0100] "GET / HTTP/1.1" 404 994
+127.0.0.1 - - [04/Feb/2017:05:32:39 +0100] "GET /GameServer/WEB-INF/classes/de/tuberlin/sese/swtpp/gameserver/control/GameFactory.java HTTP/1.1" 404 992
+127.0.0.1 - - [04/Feb/2017:05:33:58 +0100] "GET / HTTP/1.1" 404 994
+127.0.0.1 - - [04/Feb/2017:05:34:00 +0100] "GET /GameServer/GameServerServlet HTTP/1.1" 200 1999
+127.0.0.1 - - [04/Feb/2017:05:34:02 +0100] "GET /GameServer/GameServerServlet?usecase=getuserdata HTTP/1.1" 200 -
+127.0.0.1 - - [04/Feb/2017:05:34:02 +0100] "GET /GameServer/index.html HTTP/1.1" 200 4472
