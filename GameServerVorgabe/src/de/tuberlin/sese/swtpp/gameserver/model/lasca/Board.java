@@ -37,7 +37,6 @@ public class Board {
 		// setBoard("b,b,b,b/b,b,b/b,b,b,b/,,/w,w,w,w/w,w,w/w,w,w,w");
 	}
 	
-	// assertMove("a3-b4", true, true);
 	public boolean executeMove() {
 		if (isJump) {
 			
@@ -69,10 +68,10 @@ public class Board {
 		String move = "";
 		int c = startField.getColumn();
 		char charColumn = c == 0? 'a' : c == 1? 'b' : c == 2? 'c' : c == 3? 'd' : c == 4? 'e' : c == 5? 'f' : 'g';
-		move = move + charColumn + startField.getRow()+1 + "-";
+		move = move + charColumn + (7-startField.getRow()) + "-";
 		c = targetField.getColumn();
 		charColumn = c == 0? 'a' : c == 1? 'b' : c == 2? 'c' : c == 3? 'd' : c == 4? 'e' : c == 5? 'f' : 'g';
-		move = move + charColumn + targetField.getRow()+1;
+		move = move + charColumn + (7-targetField.getRow());
 		return move;
 	} */
 	
@@ -101,6 +100,14 @@ public class Board {
 			} // right
 			if (row-2 >= 0 && column+2 < 7 && fieldOwnedByPlayer(row-1, column+1, false) && isFieldEmpty(row-2, column+2)) {
 				jumpMoves.add(remapCoordinatesToMoveString(row, column, row-2, column+2));
+			}
+			if (isOfficer(row, column)) {
+				if (row+2 < 7 && column-2 >= 0 && fieldOwnedByPlayer(row+1, column-1, false) && isFieldEmpty(row+2, column-2)) {
+					jumpMoves.add(remapCoordinatesToMoveString(row, column, row+2, column-2));
+				} // right
+				if (row+2 < 7 && column+2 < 7 && fieldOwnedByPlayer(row+1, column+1, false) && isFieldEmpty(row+2, column+2)) {
+					jumpMoves.add(remapCoordinatesToMoveString(row, column, row+2, column+2));
+				}
 			}
 		}
 		System.out.println("white can do " + jumpMoves.size() + " jumps");
