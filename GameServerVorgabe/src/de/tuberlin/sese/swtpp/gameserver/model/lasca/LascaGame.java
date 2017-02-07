@@ -190,13 +190,11 @@ public class LascaGame extends Game implements Serializable{
 	
 	@Override
 	public void setState(String state) {
-		// TODO: implement
 		board.setBoard(state);
 	}
 	
 	@Override
 	public String getState() {
-		// TODO: implement
 		return board.getBoard();
 	}
 	
@@ -204,7 +202,16 @@ public class LascaGame extends Game implements Serializable{
 	public boolean tryMove(String moveString, Player player) {
 		// TODO: implement
 		// hint: see javadoc comment in super class
+		setNextPlayer(player);
 		
+		board.setRequiredMove(moveString);
+		System.out.println("required move " + moveString);
+		board.isTargetEmpty();
+		board.startOwnedByPlayer(isWhiteNext());
+		if (board.isMoveJump()) {
+			board.executeMove();
+			return true;
+		}
 		return false;
 	}
 

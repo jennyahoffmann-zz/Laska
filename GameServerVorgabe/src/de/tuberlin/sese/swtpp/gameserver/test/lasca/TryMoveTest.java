@@ -74,8 +74,8 @@ public class TryMoveTest {
 	
 	@Test
 	public void exampleTest() {
-		startGame("b,b,b,b/b,b,b/b,b,b,b/,,w/w,,w,w/w,w,w/w,w,w,w", true);
-//		assertMove("a3-b4", true, true);
-		assertGameState("b,b,b,b/b,b,b/b,b,b,b/,,w/w,,w,w/w,w,w/w,w,w,w", true, false, false);
+		startGame("b,b,b,b/b,b,b/b,b,,b/,b,/w,w,w,w/w,w,w/w,w,w,w", true);
+		assertMove("c3-e5", true, true);
+		assertGameState("b,b,b,b/b,b,b/b,b,wb,b/,,/w,,w,w/w,w,w/w,w,w,w", true, false, false);
 	}
 }

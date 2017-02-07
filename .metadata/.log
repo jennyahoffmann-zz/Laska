@@ -786,3 +786,13 @@ java.lang.RuntimeException
 
 !ENTRY org.eclipse.epp.mpc.ui 1 0 2017-02-04 19:16:21.494
 !MESSAGE Performing Marketplace install request from http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=264
+!SESSION 2017-02-06 20:37:30.166 -----------------------------------------------
+eclipse.buildId=4.5.0.I20150603-2000
+java.version=1.7.0_121
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2017-02-06 20:38:34.268
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
