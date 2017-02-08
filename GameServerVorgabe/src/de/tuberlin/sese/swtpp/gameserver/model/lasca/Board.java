@@ -22,12 +22,13 @@ public class Board {
 	
 	private String[][] boardState = {row7, row6, row5, row4, row3, row2, row1};
 	
-	int startRow;
-	int startColumn;
-	int targetRow;
-	int targetColumn;
+	private int startRow;
+	private int startColumn;
+	private int targetRow;
+	private int targetColumn;
 	
-	boolean isJump;
+	private boolean isJump;
+	private boolean itsWhiteTurn;
 	
 	public Board(String state) {
 		setBoard(state);
@@ -75,13 +76,16 @@ public class Board {
 		return move;
 	} */
 	
-	public String remapCoordinatesToMoveString(int startRow, int startColumn, int targetRow, int targetCloumn) {
+	public String remapCoordinatesToMoveString(int startRow, int startColumn, int targetRow, int targetColumn) {
+		System.out.println("set startRow " + startRow + ", startColumn " + startColumn + ", targetRow " + targetRow + ", targetCloumn " + targetColumn);
 		String move = "";
 		int c = startColumn;
 		char charColumn = c == 0? 'a' : c == 1? 'b' : c == 2? 'c' : c == 3? 'd' : c == 4? 'e' : c == 5? 'f' : 'g';
+		System.out.println("set startColumn " + startColumn + " to " + charColumn + "and set startRow " + startRow + " to " + (7-startRow));
 		move = move + charColumn + (7-startRow) + "-";
 		c = targetColumn;
 		charColumn = c == 0? 'a' : c == 1? 'b' : c == 2? 'c' : c == 3? 'd' : c == 4? 'e' : c == 5? 'f' : 'g';
+		System.out.println("set targetColumn " + targetColumn + " to " + charColumn + " and set targetRow " + targetRow + " to " + (7-targetRow));
 		move = move + charColumn + (7-targetRow);
 		return move;
 	}
@@ -111,15 +115,45 @@ public class Board {
 			}
 		}
 		System.out.println("white can do " + jumpMoves.size() + " jumps");
-		return jumpMoves;
-		
+		return jumpMoves;	
 	}
 	
-	private ArrayList<String> getAllJumps(boolean isWhite) {
-		if (isWhite) {
+	private ArrayList<String> getAllJumpsBlackPlayer() {
+		ArrayList<Field> fieldsOwnedByBlack = getAllFieldsOwnedByPlayer(false);
+		System.out.println("black ownes " + fieldsOwnedByBlack.size() + " fields");
+		ArrayList<String> jumpMoves = new ArrayList<String>();
+		int row, column;
+		for (Field field:fieldsOwnedByBlack) {
+			row = field.getRow();
+			column = field.getColumn();
+			// left
+			if (row+2 < 7 && column-2 >= 0 && fieldOwnedByPlayer(row+1, column-1, true) && isFieldEmpty(row+2, column-2)) {
+				jumpMoves.add(remapCoordinatesToMoveString(row, column, row+2, column-2));
+				System.out.println("set move from " + row + ", " + column + " to " + (row+2) + ", " + (column-2));
+			} // right
+			if (row+2 < 7 && column+2 < 7 && fieldOwnedByPlayer(row+1, column+1, true) && isFieldEmpty(row+2, column+2)) {
+				jumpMoves.add(remapCoordinatesToMoveString(row, column, row+2, column+2));
+				System.out.println("set move from " + row + ", " + column + " to " + (row+2) + ", " + (column+2));
+			}
+			if (isOfficer(row, column)) {
+				if (row-2 >= 0 && column-2 >= 0 && fieldOwnedByPlayer(row-1, column-1, true) && isFieldEmpty(row-2, column-2)) {
+					jumpMoves.add(remapCoordinatesToMoveString(row, column, row-2, column-2));
+				} // right
+				if (row-2 >= 0 && column+2 < 7 && fieldOwnedByPlayer(row-1, column+1, true) && isFieldEmpty(row-2, column+2)) {
+					jumpMoves.add(remapCoordinatesToMoveString(row, column, row-2, column+2));
+				}
+			}
+		}
+		System.out.println("black can do " + jumpMoves.size() + " jumps");
+		return jumpMoves;	
+	}
+	
+	private ArrayList<String> getAllJumps() {
+		if (itsWhiteTurn) {
 			return getAllJumpsWhitePlayer();	
-		}		
-		return null;
+		} else {
+			return getAllJumpsBlackPlayer();	
+		}
 	}
 	
 	private void printMoves(ArrayList<String> moves) {
@@ -131,14 +165,15 @@ public class Board {
 	}
 	
 	public boolean isMoveJump() {
-		ArrayList<String> jumpMoves = getAllJumps(true);
+		ArrayList<String> jumpMoves = getAllJumps();
 		printMoves(jumpMoves);
 		isJump = jumpMoves.contains(remapCoordinatesToMoveString(startRow, startColumn, targetRow, targetColumn));
 		return isJump;
 	}
 
-	public boolean startOwnedByPlayer(boolean isWhite) {
-		return fieldOwnedByPlayer(startRow, startColumn, isWhite);
+	public boolean startOwnedByPlayer() {
+		System.out.println("start ownes by player " + fieldOwnedByPlayer(startRow, startColumn, itsWhiteTurn));
+		return fieldOwnedByPlayer(startRow, startColumn, itsWhiteTurn);
 	}
 	
 	private boolean fieldOwnedByPlayer(int row, int column, boolean isWhite) {
@@ -151,6 +186,18 @@ public class Board {
 		}
 	}
 	
+	private void printField(Field field) {
+		System.out.println(field.getRow() + ", " + field.getColumn() + " " + boardState[field.getRow()][field.getColumn()]);
+	}
+	
+	private void printFields(ArrayList<Field> fields) {
+		System.out.println("Fields owned by player");
+		for (Field field:fields) {
+			printField(field);
+		}
+		System.out.println("end Fields owned by player");
+	}
+	
 	private ArrayList<Field> getAllFieldsOwnedByPlayer(boolean isWhite) {
 		ArrayList<Field> fields = new ArrayList<Field>();
 		Field field;
@@ -160,13 +207,14 @@ public class Board {
 					field = new Field(i,j);
 					fields.add(field);
 				}
-				if (!isWhite && fieldOwnedByPlayer(i, j, !isWhite)) {
+				if (!isWhite && fieldOwnedByPlayer(i, j, isWhite)) {
 					field = new Field(i,j);
 					fields.add(field);
 				}
 				
 			}
 		}
+		printFields(fields);
 		return fields;
 	}
 	
@@ -178,11 +226,12 @@ public class Board {
 		return boardState[row][column].compareTo("") == 0 ? true : false;
 	}
 	
-	public void setRequiredMove(String move) {
+	public void setRequiredMove(String move, boolean isWhite) {
 		startRow = mapCooradinatesToBoard(move.substring(0, 2))[0];
 		startColumn = mapCooradinatesToBoard(move.substring(0, 2))[1];
 		targetRow = mapCooradinatesToBoard(move.substring(3))[0];
 		targetColumn = mapCooradinatesToBoard(move.substring(3))[1];
+		this.itsWhiteTurn = isWhite;
 		isJump = false; // because we don't know so far
 	}
 	
@@ -202,23 +251,23 @@ public class Board {
 	 ******************************/
 	
 	public void setBoard(String state) {
-	//	System.out.println(state);
+		System.out.println(state);
 		String[] newBoardStateRows = state.split("/");
 		
 		for (int i = 0; i < 7; i++) {
-//			System.out.println(newBoardStateRows[i]);
+			System.out.println(newBoardStateRows[i]);
 			List<String> newRow = new ArrayList<String>(Arrays.asList(newBoardStateRows[i].split(",")));
-			newRow.add("");
 			for (int j = 0; j < 7; j++) {
-		//		System.out.println("left length " + newRow.size());
-				//System.out.println("can I set " + newRow.get(0).toString());
+				if (newRow.size() == 0) continue;
+				System.out.println("left length " + newRow.size());
+				System.out.println("can I set " + newRow.get(0).toString());
 				if (i % 2 == 0 && j % 2 == 0) {    // rows with 4 fields (7, 5, 3, 1) && field A, C, E, G
-			//		System.out.println("set " + newRow.get(0).toString() + " in " + i + "," + j);
+					System.out.println("set " + newRow.get(0).toString() + " in " + i + "," + j);
 					boardState[i][j] = newRow.get(0).toString();
 					newRow.remove(0);
 				}
 				if (i % 2 != 0 && j % 2 != 0) {   // rows with 3 fields (6, 4, 2) && field B, D, F
-			//		System.out.println("set " + newRow.get(0).toString() + " in " + i + "," + j);
+					System.out.println("set " + newRow.get(0).toString() + " in " + i + "," + j);
 					boardState[i][j] = newRow.get(0).toString();
 					newRow.remove(0);
 				}

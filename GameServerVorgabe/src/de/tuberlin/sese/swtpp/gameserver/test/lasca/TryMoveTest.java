@@ -36,7 +36,7 @@ public class TryMoveTest {
 	public void startGame(String initialBoard, boolean whiteNext) {
 		controller.joinGame(user2);		
 		blackPlayer = game.getPlayer(user2);
-		
+	
 		game.setState(initialBoard);
 		game.setNextPlayer(whiteNext? whitePlayer:blackPlayer);
 	}
@@ -71,7 +71,7 @@ public class TryMoveTest {
 	} */
 
 	//TODO: implement test cases of same kind as example here
-	
+/*	
 	@Test
 	public void exampleTest() {
 		startGame("b,b,b,b/b,b,b/b,b,,b/,b,/w,w,w,w/w,w,w/w,w,w,w", true);
@@ -85,5 +85,19 @@ public class TryMoveTest {
 		startGame("b,b,b,b/b,b,b/b,b,W,b/,b,/w,,w,w/w,w,w/w,w,w,w", true);
 		assertMove("e5-c3", true, true);
 		assertGameState("b,b,b,b/b,b,b/b,b,,b/,,/w,Wb,w,w/w,w,w/w,w,w,w", true, false, false);
+	}
+	
+	@Test
+	public void exampleTest3() {
+		startGame("b,b,b,b/b,b,b/b,,,b/,b,/w,w,w,w/w,w,w/w,w,w,w", true);
+		assertMove("c3-e5", true, true);
+		assertGameState("b,b,b,b/b,b,b/b,,wb,b/,,/w,,w,w/w,w,w/w,w,w,w", true, false, false);
+	}
+	*/
+	@Test
+	public void exampleTest4() {
+		startGame("b,b,b,b/b,b,b/b,b,b,b/,w,/w,,,w/w,w,w/w,w,w,w", false);
+		assertMove("c5-e3", false, true);
+		assertGameState("b,b,b,b/b,b,b/b,,b,b/,,/w,,bw,w/w,w,w/w,w,w,w", false, false, false);
 	}
 }
