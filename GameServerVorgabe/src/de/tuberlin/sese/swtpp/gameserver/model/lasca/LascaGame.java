@@ -202,16 +202,11 @@ public class LascaGame extends Game implements Serializable{
 	public boolean tryMove(String moveString, Player player) {
 		// TODO: implement
 		// hint: see javadoc comment in super class
-//  	setNextPlayer(player);
-		
-		System.out.println("white next " + isWhiteNext());
-		board.setRequiredMove(moveString, isWhiteNext());
-		System.out.println("required move " + moveString);
-		board.isTargetEmpty();
-		board.startOwnedByPlayer();
-		if (board.isMoveJump()) {
-			System.out.println("is jump");
-			board.executeMove();
+		if (isItMyTurn(player) && board.tryMove(moveString, isWhiteNext())) {
+			if (board.canPlayerDoAnotherJump()) return true; 
+			if (board.isGameFinished()) return finish(isItMyTurn(whitePlayer)? whitePlayer : blackPlayer); //the other player cannot move anymore
+			setNextPlayer(isItMyTurn(whitePlayer)? blackPlayer : whitePlayer);	
+			System.out.println("next player will be " + !isItMyTurn(whitePlayer));
 			return true;
 		}
 		return false;

@@ -63,20 +63,21 @@ public class TryMoveTest {
 	 * !!!!!!!!! To be implemented !!!!!!!!!!!!
 	 *******************************************/
 	
-/*	@Test
+	@Test
 	public void exampleTest() {
 		startGame("b,b,b,b/b,b,b/b,b,b,b/,,/w,w,w,w/w,w,w/w,w,w,w", true);
 		assertMove("a3-b4", true, true);
 		assertGameState("b,b,b,b/b,b,b/b,b,b,b/w,,/,w,w,w/w,w,w/w,w,w,w", false, false, false);
-	} */
+	} 
 
 	//TODO: implement test cases of same kind as example here
-/*	
+
+	
 	@Test
-	public void exampleTest() {
+	public void exampleTest5() {
 		startGame("b,b,b,b/b,b,b/b,b,,b/,b,/w,w,w,w/w,w,w/w,w,w,w", true);
 		assertMove("c3-e5", true, true);
-		assertGameState("b,b,b,b/b,b,b/b,b,wb,b/,,/w,,w,w/w,w,w/w,w,w,w", true, false, false);
+		assertGameState("b,b,b,b/b,b,b/b,b,wb,b/,,/w,,w,w/w,w,w/w,w,w,w", false, false, false);
 	}
 	
 
@@ -84,20 +85,21 @@ public class TryMoveTest {
 	public void exampleTest2() {
 		startGame("b,b,b,b/b,b,b/b,b,W,b/,b,/w,,w,w/w,w,w/w,w,w,w", true);
 		assertMove("e5-c3", true, true);
-		assertGameState("b,b,b,b/b,b,b/b,b,,b/,,/w,Wb,w,w/w,w,w/w,w,w,w", true, false, false);
+		assertGameState("b,b,b,b/b,b,b/b,b,,b/,,/w,Wb,w,w/w,w,w/w,w,w,w", false, false, false);
 	}
 	
 	@Test
 	public void exampleTest3() {
 		startGame("b,b,b,b/b,b,b/b,,,b/,b,/w,w,w,w/w,w,w/w,w,w,w", true);
 		assertMove("c3-e5", true, true);
-		assertGameState("b,b,b,b/b,b,b/b,,wb,b/,,/w,,w,w/w,w,w/w,w,w,w", true, false, false);
+		assertGameState("b,b,b,b/b,b,b/b,,wb,b/,,/w,,w,w/w,w,w/w,w,w,w", false, false, false);
 	}
-	*/
+	
 	@Test
 	public void exampleTest4() {
 		startGame("b,b,b,b/b,b,b/b,b,b,b/,w,/w,,,w/w,w,w/w,w,w,w", false);
 		assertMove("c5-e3", false, true);
-		assertGameState("b,b,b,b/b,b,b/b,,b,b/,,/w,,bw,w/w,w,w/w,w,w,w", false, false, false);
+		assertGameState("b,b,b,b/b,b,b/b,,b,b/,,/w,,bw,w/w,w,w/w,w,w,w", true, false, false);
 	}
+	
 }
