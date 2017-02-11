@@ -206,7 +206,6 @@ public class LascaGame extends Game implements Serializable{
 			if (board.canPlayerDoAnotherJump()) return true; 
 			if (board.isGameFinished()) return finish(isItMyTurn(whitePlayer)? whitePlayer : blackPlayer); //the other player cannot move anymore
 			setNextPlayer(isItMyTurn(whitePlayer)? blackPlayer : whitePlayer);	
-			System.out.println("next player will be " + !isItMyTurn(whitePlayer));
 			return true;
 		}
 		return false;
