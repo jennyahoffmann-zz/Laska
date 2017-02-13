@@ -13,15 +13,8 @@
 		</list>
 	</section>
 	<section name="WorkbenchPreferenceDialogSettings">
-		<item value="0" key="DIALOG_Y_ORIGIN"/>
-		<item value="235" key="DIALOG_X_ORIGIN"/>
-	</section>
-	<section name="InstallationDialogSettings">
-		<item value="574" key="DIALOG_WIDTH"/>
-		<item value="-173" key="DIALOG_Y_ORIGIN"/>
-		<item value="684" key="DIALOG_HEIGHT"/>
-		<item value="87" key="DIALOG_X_ORIGIN"/>
-		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+		<item value="-689" key="DIALOG_Y_ORIGIN"/>
+		<item value="667" key="DIALOG_X_ORIGIN"/>
 	</section>
 	<section name="NewWizardAction">
 		<item value="org.eclipse.wst.server.ui.new.server" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
@@ -31,6 +24,13 @@
 			<item value="org.eclipse.wst.web.ui"/>
 			<item value="org.eclipse.jst.ws.ui.new"/>
 		</list>
+	</section>
+	<section name="InstallationDialogSettings">
+		<item value="574" key="DIALOG_WIDTH"/>
+		<item value="-173" key="DIALOG_Y_ORIGIN"/>
+		<item value="87" key="DIALOG_X_ORIGIN"/>
+		<item value="684" key="DIALOG_HEIGHT"/>
+		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="ImportExportAction">
 		<item value="org.eclipse.ui.wizards.import.ExternalProject" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
