@@ -18,17 +18,15 @@ listMoves :: String -> String
 data Color = White | Black
 
 
---type Move = String -- noch einen besseren typ ausdenken!
-
-
 data Field = Field Char Int
+
 data Move = Move Field Field
+
 
 
 type Row = [String]
 
 type Board = [Row]
-
 
 data Game = Game Board Color Move |
             Game2 Board Color 
@@ -37,15 +35,38 @@ data Game = Game Board Color Move |
 
 --- logic (TODO)
 getMove   s = "g3-f4" -- Eigene Definition einfügen!
-listMoves s = "[g3-f4,...]" -- Eigene Definition einfügen!
+
+--listMoves s = "[g3-f4,...]" 
+
+
+listMoves s = 
+
+    let g = parse s in
+    
+    printMoves (findMoves g)
 
 
 
---listMoves s = let
---    g = parseInput s
+-- gibt die verfügbaren züge zurück
+findMoves :: Game -> [Move]
+findMoves (Game b c) = checkWichMoves g (findNormalMoves g)
 
- --   in
 
+-- falls die normalMoves eine leere liste sind, gib jumpMoves zurück
+-- sonst normalMoves
+checkWichMoves :: Game -> [Move] -> [Move]
+checkWichMoves g [] = findJumpMoves g
+checkWichMoves g m  = m
+
+
+-- TODO
+
+findNormalMoves :: Game -> [Move]
+fomdNormalMoves (Game b c) =
+
+
+findJumpMoves :: Game -> [Move]
+findJumpMoves (Game b c) = 
 
 
 -- input and parsing
@@ -106,4 +127,7 @@ instance Eq Color where
     (==) Black Black = True
     (==) _ _ = False    
 
-    --- ... ---
+
+-- TODO!!
+printMoves :: [Move] -> String
+printMoves (m:[]) = "[g3-f4,...]"
